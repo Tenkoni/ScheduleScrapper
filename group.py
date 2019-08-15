@@ -43,8 +43,10 @@ class Group:
 	def addHorario(self, time_expr):
 		time_list = time_expr.replace(':', '.')
 		time_list = re.findall('\d*[.]\d+', time_list)
-		self.horario = [float(i) for i in time_list]
-
+		try:
+			self.horario += [float(i) for i in time_list]
+		except:
+			self.horario = [float(i) for i in time_list]
 	def addDias(self, dias):
 		day_list = dias.replace(',', '')
 		day_list = day_list.split()
@@ -62,7 +64,9 @@ class Group:
 				numeric_days.append(5)
 			elif day == 'Sab':
 				numeric_days.append(6)
-		self.dias = numeric_days
-
+		try:
+			self.dias += numeric_days
+		except:
+			self.dias = numeric_days
 
 

@@ -1,6 +1,16 @@
 from scrapper import ScrapGroup
 
-group_obj = ScrapGroup("1322")
-print(len(group_obj))
-for group in group_obj:
-	group.printGroup()
+
+list_of_classes = ['1228','1322','1447','2068']
+list_of_groups = []
+
+for cla in list_of_classes:
+	list_of_groups.append(ScrapGroup(cla))
+
+try:
+	print(len(list_of_groups))
+	for cla in list_of_groups:
+		for group in cla:
+			group.printGroup()
+except TypeError:
+	print("Grupo inválido")
