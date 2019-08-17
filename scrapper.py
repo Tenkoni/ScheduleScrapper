@@ -37,7 +37,9 @@ def ScrapGroup(class_sel):
 			horario_t = next(doubleJump(group_iter))
 			dias_t = next(doubleJump(group_iter))
 			salon_t = next(doubleJump(group_iter))
-			group_list.append(Group(tipo = tipo_t, horario = horario_t, dias = dias_t, salon = salon_t))
+			group_list[-1].addHorario_lab(horario_t)
+			group_list[-1].addDias_lab(dias_t)
+			group_list[-1].labo_salon = salon_t
 
 		elif isInt(group_content):
 			clave_t = next(doubleJump(group_iter))
