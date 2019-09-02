@@ -6,6 +6,7 @@ from group import Group
 def doubleJump(iterator):
 	next(iterator)
 	return iterator
+		 
 
 def isInt(value):
 	try: 
@@ -24,7 +25,7 @@ def ScrapGroup(class_sel):
 	if url == "Invalid class":
 		return 
 	status, plain_html = extractHTML(url)
-	soup = BeautifulSoup(plain_html)
+	soup = BeautifulSoup(plain_html, "html.parser")
 	tree_groups = soup.find_all("tr")
 	group_list=[]
 	tree_groups.pop(0) #remove 2 first branches of the tree
