@@ -37,7 +37,6 @@ class Group:
 			print (self.labo_dias)
 			print ("Salón_lab: ")
 			print (self.labo_salon)
-			print("---------LAB+---------")
 		print("--------------------------")
 
 	def addHorario(self, time_expr):
