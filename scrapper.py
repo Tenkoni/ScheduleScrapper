@@ -24,6 +24,7 @@ def ScrapGroup(class_sel):
 		sys.exit()
 	if url == "Invalid class":
 		return 
+	#print(url)
 	status, plain_html = extractHTML(url)
 	soup = BeautifulSoup(plain_html, "html.parser")
 	tree_groups = soup.find_all("tr")
@@ -31,13 +32,17 @@ def ScrapGroup(class_sel):
 	tree_groups.pop(0) #remove 2 first branches of the tree
 	tree_groups.pop(0) 
 	for gr in tree_groups:
+		print(list(gr.descendants))
 		group_iter = gr.descendants #create a generator containing all the branches of the tree
 		group_content = next(doubleJump(gr.descendants))
 		if group_content == 'L':
 			tipo_t = next(doubleJump(group_iter))
 			horario_t = next(doubleJump(group_iter))
 			dias_t = next(doubleJump(group_iter))
-			salon_t = next(doubleJump(group_iter))
+			try:
+				salon_t = next(doubleJump(group_iter))
+			except:
+				salon_t = "Sin Asignar"
 			group_list[-1].addHorario_lab(horario_t)
 			group_list[-1].addDias_lab(dias_t)
 			group_list[-1].labo_salon = salon_t
@@ -50,14 +55,24 @@ def ScrapGroup(class_sel):
 			horario_t = next(doubleJump(group_iter))
 			dias_t = next(doubleJump(group_iter))
 			salon_t = next(doubleJump(group_iter))
-			cupo_t = next(doubleJump(group_iter))
-			vacantes_t = next(doubleJump(group_iter))
+			try:
+				cupo_t = next(doubleJump(group_iter))
+			except:
+				cupo_t = salon_t
+				salon_t = "Sin Asignar"
+			try:
+				vacantes_t = next(doubleJump(group_iter))
+			except:
+				vacantes_t = cupo_t
 			group_list.append(Group(clave = clave_t, grupo = grupo_t, profesor = profesor_t, tipo = tipo_t, horario = horario_t, dias = dias_t, salon = salon_t, cupo = cupo_t, vacantes = vacantes_t))
 
 		elif len(list(gr.descendants))==6:
 			horario_t = next(doubleJump(group_iter))
 			dias_t = next(doubleJump(group_iter))
-			salon_t = next(doubleJump(group_iter))
+			try:
+				salon_t = next(doubleJump(group_iter))
+			except:
+				salon_t = "Sin Asignar"
 			group_list[-1].salon.append(salon_t)
 			group_list[-1].addHorario(horario_t)
 			group_list[-1].addDias(dias_t)
