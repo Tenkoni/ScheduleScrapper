@@ -32,7 +32,7 @@ def ScrapGroup(class_sel):
 	tree_groups.pop(0) #remove 2 first branches of the tree
 	tree_groups.pop(0) 
 	for gr in tree_groups:
-		print(list(gr.descendants))
+		#print(list(gr.descendants))
 		group_iter = gr.descendants #create a generator containing all the branches of the tree
 		group_content = next(doubleJump(gr.descendants))
 		if group_content == 'L':
