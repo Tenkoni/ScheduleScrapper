@@ -43,9 +43,12 @@ class Group:
 		time_list = time_expr.replace(':', '.')
 		time_list = re.findall('\d*[.]\d+', time_list)
 		try:
+			#cast to float of each element in case self.horario already has a value
 			self.horario += [float(i) for i in time_list]
 		except:
+			#cast in case there's no value for horario
 			self.horario = [float(i) for i in time_list]
+	
 	def addDias(self, dias):
 		day_list = dias.replace(',', '')
 		day_list = day_list.split()
@@ -75,6 +78,7 @@ class Group:
 			self.labo_horario += [float(i) for i in time_list]
 		except:
 			self.labo_horario = [float(i) for i in time_list]
+	
 	def addDias_lab(self, dias):
 		day_list = dias.replace(',', '')
 		day_list = day_list.split()
